@@ -1,0 +1,18 @@
+{
+  "name": "sylvanianforest.com",
+  "version": "0.1.0",
+  "description": "Static site for sylvanianforest.com — generated from SQLite via Eleventy",
+  "type": "module",
+  "scripts": {
+    "seed:reset": "node scripts/seed.js",
+    "build": "eleventy",
+    "serve": "eleventy --serve",
+    "clean": "rm -rf _site"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.0.0"
+  }
+}
