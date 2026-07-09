@@ -1,5 +1,6 @@
 node_modules/
 _site/
+.DS_Store
 
 # data/forest.db is intentionally committed — it is the hand-edited source of
 # truth for the site. Edit it with a GUI (DB Browser for SQLite), then rebuild.
