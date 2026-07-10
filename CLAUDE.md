@@ -14,10 +14,10 @@ the database is only ever read at **build time**, never at runtime.
 
 ## Data flow
 
-`data/forest.db` → `src/_data/characters.js` (queries SQLite) → `src/character.njk`
+`data/forest.db` → `src/_data/sets.js` (queries SQLite) → `src/set.njk`
 (one page per row via Eleventy pagination) → `_site/` → deployed.
 
-`src/_data/characters.js` is the **only** file that knows where data comes from.
+`src/_data/sets.js` is the **only** file that knows where data comes from.
 If the data source ever changes (API, CSV, CMS), change that one file — templates
 and permalinks stay the same.
 
@@ -37,7 +37,7 @@ and permalinks stay the same.
   gitignored. Edit it with a GUI (DB Browser for SQLite), then commit the `.db`
   file so the change is tracked and the build is reproducible.
 - **NEVER run `npm run seed:reset` as part of normal work.** It DROPS the
-  `characters` table and recreates it with sample data — it will destroy real
+  `sets` table and recreates it with sample data — it will destroy real
   edits. It exists only to recreate the database from scratch.
 - **Never edit `_site/` by hand** — it is generated output. Change templates,
   data, or the database instead.
