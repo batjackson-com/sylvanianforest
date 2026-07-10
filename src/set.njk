@@ -21,5 +21,18 @@ eleventyComputed:
     <span>{{ set.year }}</span>
   </p>
   {% if set.setId %}<p class="set-id">Set ID: <code>{{ set.setId }}</code></p>{% endif %}
+
+  {% if set.photos.length %}
+  <ul class="photos">
+    {% for photo in set.photos %}
+    <li>
+      <img src="/assets/sets/{{ photo.filename }}" alt="{{ photo.caption or set.name }}"
+           width="400" height="300" loading="lazy" />
+      {% if photo.caption %}<figcaption>{{ photo.caption }}</figcaption>{% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
   <p>{{ set.description }}</p>
 </article>

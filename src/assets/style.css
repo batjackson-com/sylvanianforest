@@ -17,4 +17,15 @@ a { color: var(--accent); }
   border: 1px solid #eadfce; border-radius: 10px; text-decoration: none; }
 .grid a:hover { border-color: var(--accent); }
 .grid span { display: block; color: #887; font-size: .85rem; }
+.grid .thumb { display: block; width: 100%; height: auto; border-radius: 6px;
+  margin-bottom: .6rem; background: #f2ebdd; }
+
+/* Set photo gallery */
+.photos { list-style: none; padding: 0; margin: 1.25rem 0; display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+.photos li { margin: 0; }
+.photos img { display: block; width: 100%; height: auto; border-radius: 8px;
+  border: 1px solid #eadfce; background: #f2ebdd; }
+.photos figcaption { margin-top: .35rem; color: #887; font-size: .85rem; }
+
 footer { color: #998; font-size: .85rem; border-top: 1px solid #e6dccb; }
