@@ -21,7 +21,7 @@ db.exec(`
     year        INTEGER,
     description TEXT,
     brand       TEXT,
-    set_id      TEXT
+    setId       TEXT
   );
 `);
 
@@ -39,8 +39,8 @@ const slugify = (s) =>
   s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
 const insert = db.prepare(
-  `INSERT INTO sets (slug, name, family, species, year, description, brand, set_id)
-   VALUES (@slug, @name, @family, @species, @year, @description, @brand, @set_id)`
+  `INSERT INTO sets (slug, name, family, species, year, description, brand, setId)
+   VALUES (@slug, @name, @family, @species, @year, @description, @brand, @setId)`
 );
 
 // Generate a few hundred sample rows so pagination/build behavior is realistic.
@@ -60,7 +60,7 @@ for (const [family, species] of FAMILIES) {
       year: 1985 + (n % 35),
       description: `${name} of the ${family} family, a beloved ${species} of Sylvanian Forest.`,
       brand: "Sylvanian Families",
-      set_id: `SF-${String(n).padStart(4, "0")}`,
+      setId: `SF-${String(n).padStart(4, "0")}`,
     });
   }
 }
