@@ -11,6 +11,7 @@ fs.mkdirSync(path.dirname(DB_PATH), { recursive: true });
 const db = openDb();
 
 db.exec(`
+  DROP TABLE IF EXISTS photos;
   DROP TABLE IF EXISTS sets;
   CREATE TABLE sets (
     id          INTEGER PRIMARY KEY,
@@ -23,6 +24,14 @@ db.exec(`
     brand       TEXT,
     setId       TEXT
   );
+  CREATE TABLE photos (
+    id       INTEGER PRIMARY KEY,
+    setId    INTEGER NOT NULL REFERENCES sets(id) ON DELETE CASCADE,
+    filename TEXT NOT NULL,
+    caption  TEXT,
+    sort     INTEGER NOT NULL DEFAULT 0
+  );
+  CREATE INDEX idx_photos_setId ON photos(setId);
 `);
 
 const FAMILIES = [
@@ -66,5 +75,27 @@ for (const [family, species] of FAMILIES) {
 }
 
 insertMany(rows);
-console.log(`Seeded ${rows.length} sets into ${DB_PATH}`);
+
+// Sample photos. Files live in src/assets/sets/ and are committed to the repo.
+// setId here is the foreign key to sets.id, looked up by slug.
+const setIdBySlug = (slug) =>
+  db.prepare("SELECT id FROM sets WHERE slug = ?").get(slug).id;
+
+const insertPhoto = db.prepare(
+  `INSERT INTO photos (setId, filename, caption, sort)
+   VALUES (@setId, @filename, @caption, @sort)`
+);
+const samplePhotos = [
+  ["chocolate-rabbit-father", "chocolate-rabbit-father-1.svg", "Box front", 0],
+  ["chocolate-rabbit-father", "chocolate-rabbit-father-2.svg", "Set contents", 1],
+  ["chocolate-rabbit-mother", "chocolate-rabbit-mother-1.svg", "Box front", 0],
+  ["hazelnut-chipmunk-father", "hazelnut-chipmunk-father-1.svg", "Box front", 0],
+];
+db.transaction(() => {
+  for (const [slug, filename, caption, sort] of samplePhotos) {
+    insertPhoto.run({ setId: setIdBySlug(slug), filename, caption, sort });
+  }
+})();
+
+console.log(`Seeded ${rows.length} sets and ${samplePhotos.length} photos into ${DB_PATH}`);
 db.close();

@@ -9,8 +9,16 @@ title: Home
   {% for set in sets %}
   <li>
     <a href="/sets/{{ set.slug }}/">
-      <strong>{{ set.name }}</strong>
-      <span>{{ set.brand }} · {{ set.year }}</span>
+      {% if set.photos.length %}
+      <img class="thumb" src="/assets/sets/{{ set.photos[0].filename }}" alt=""
+           width="400" height="300" loading="lazy" />
+      {% else %}
+      <span class="thumb thumb--empty" aria-hidden="true">No photo</span>
+      {% endif %}
+      <span class="card-body">
+        <strong>{{ set.name }}</strong>
+        <span>{{ set.brand }} · {{ set.year }}</span>
+      </span>
     </a>
   </li>
   {% endfor %}

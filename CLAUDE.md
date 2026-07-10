@@ -21,6 +21,13 @@ the database is only ever read at **build time**, never at runtime.
 If the data source ever changes (API, CSV, CMS), change that one file — templates
 and permalinks stay the same.
 
+The `photos` table holds set images (one-to-many: `photos.setId` → `sets.id`).
+`src/_data/sets.js` attaches each set's ordered photos as `set.photos`. Image
+files live in `src/assets/sets/` (committed to the repo) and `photos.filename`
+names the file; the template renders `/assets/sets/<filename>`. Note: the FK
+`photos.setId` (integer → `sets.id`) is distinct from the `sets.setId` catalog
+code (a text display field) — same name, different meaning.
+
 ## Rules
 
 - **Never commit directly to `main`.** `main` is protected — direct pushes are

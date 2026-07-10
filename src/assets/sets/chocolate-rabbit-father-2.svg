@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Chocolate Rabbit Father — set contents">
+  <rect width="400" height="300" fill="#f0e7d8"/>
+  <rect x="16" y="16" width="368" height="268" fill="#fff" stroke="#c9b393" stroke-width="2"/>
+  <circle cx="140" cy="150" r="34" fill="#a9764f"/>
+  <circle cx="230" cy="150" r="26" fill="#c08f63"/>
+  <circle cx="300" cy="160" r="20" fill="#d6a877"/>
+  <text x="200" y="248" font-family="system-ui, sans-serif" font-size="14" fill="#8a7355" text-anchor="middle">Set contents</text>
+</svg>
