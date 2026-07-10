@@ -1,0 +1,23 @@
+---
+# One index page per distinct setType, e.g. /types/adults/.
+# Paginates the `setTypes` global (src/_data/setTypes.js) and lists the sets
+# whose setType matches. Reuses the shared card macro so cards match the home page.
+layout: base.njk
+pagination:
+  data: setTypes
+  size: 1
+  alias: type
+permalink: "/types/{{ type.slug }}/"
+eleventyComputed:
+  title: "{{ type.name }}"
+---
+{% from "setcard.njk" import card %}
+<p class="crumbs"><a href="/">Home</a> / Types</p>
+<h1>{{ type.name }}</h1>
+<p>{{ type.count }} set{% if type.count != 1 %}s{% endif %}</p>
+
+<ul class="grid">
+  {% for set in sets %}
+    {% if set.setType == type.name %}{{ card(set) }}{% endif %}
+  {% endfor %}
+</ul>

@@ -2,24 +2,19 @@
 layout: base.njk
 title: Home
 ---
+{% from "setcard.njk" import card %}
 <h1>Sylvanian Forest</h1>
 <p>{{ sets | length }} sets, one page each.</p>
 
+<nav class="types" aria-label="Browse by type">
+  <h2>Browse by type</h2>
+  <ul>
+    {% for type in setTypes %}
+    <li><a href="/types/{{ type.slug }}/">{{ type.name }} <span>{{ type.count }}</span></a></li>
+    {% endfor %}
+  </ul>
+</nav>
+
 <ul class="grid">
-  {% for set in sets %}
-  <li>
-    <a href="/sets/{{ set.slug }}/">
-      {% if set.photos.length %}
-      <img class="thumb" src="/assets/sets/{{ set.photos[0].filename }}" alt=""
-           width="400" height="300" loading="lazy" />
-      {% else %}
-      <span class="thumb thumb--empty" aria-hidden="true">No photo</span>
-      {% endif %}
-      <span class="card-body">
-        <strong>{{ set.name }}</strong>
-        <span>{{ set.brand }} · {{ set.year }}</span>
-      </span>
-    </a>
-  </li>
-  {% endfor %}
+  {% for set in sets %}{{ card(set) }}{% endfor %}
 </ul>
