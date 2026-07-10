@@ -1,0 +1,25 @@
+---
+# This ONE template generates one static HTML page per DB row.
+# `pagination` walks the `sets` global (from src/_data/sets.js),
+# and `permalink` decides each page's URL from that row's data.
+layout: base.njk
+pagination:
+  data: sets
+  size: 1
+  alias: set
+permalink: "/sets/{{ set.slug }}/"
+eleventyComputed:
+  title: "{{ set.name }}"
+---
+<article class="set">
+  <p class="crumbs"><a href="/">Home</a> / {{ set.family }}</p>
+  <h1>{{ set.name }}</h1>
+  <p class="meta">
+    <span>{{ set.brand }}</span> ·
+    <span>{{ set.species }}</span> ·
+    <span>{{ set.family }} family</span> ·
+    <span>{{ set.year }}</span>
+  </p>
+  {% if set.set_id %}<p class="set-id">Set ID: <code>{{ set.set_id }}</code></p>{% endif %}
+  <p>{{ set.description }}</p>
+</article>

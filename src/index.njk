@@ -3,14 +3,14 @@ layout: base.njk
 title: Home
 ---
 <h1>Sylvanian Forest</h1>
-<p>{{ characters | length }} characters, one page each.</p>
+<p>{{ sets | length }} sets, one page each.</p>
 
 <ul class="grid">
-  {% for character in characters %}
+  {% for set in sets %}
   <li>
-    <a href="/characters/{{ character.slug }}/">
-      <strong>{{ character.name }}</strong>
-      <span>{{ character.species }} · {{ character.year }}</span>
+    <a href="/sets/{{ set.slug }}/">
+      <strong>{{ set.name }}</strong>
+      <span>{{ set.brand }} · {{ set.year }}</span>
     </a>
   </li>
   {% endfor %}
