@@ -13,12 +13,18 @@ a { color: var(--accent); }
 .meta { color: #776; }
 .grid { list-style: none; padding: 0; display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: .75rem; }
-.grid a { display: block; padding: .9rem 1rem; background: var(--card);
-  border: 1px solid #eadfce; border-radius: 10px; text-decoration: none; }
+.grid li { display: flex; }
+.grid a { display: flex; flex-direction: column; width: 100%;
+  background: var(--card); border: 1px solid #eadfce; border-radius: 10px;
+  overflow: hidden; text-decoration: none; }
 .grid a:hover { border-color: var(--accent); }
-.grid span { display: block; color: #887; font-size: .85rem; }
-.grid .thumb { display: block; width: 100%; height: auto; border-radius: 6px;
-  margin-bottom: .6rem; background: #f2ebdd; }
+.grid .card-body { display: block; padding: .9rem 1rem; }
+.grid .card-body span { display: block; color: #887; font-size: .85rem; }
+/* Uniform image area on every card (4:3), so rows line up with or without a photo. */
+.grid .thumb { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3;
+  object-fit: cover; background: #f2ebdd; border-bottom: 1px solid #eadfce; }
+.grid .thumb--empty { display: flex; align-items: center; justify-content: center;
+  color: #b9a888; font-size: .8rem; letter-spacing: .03em; }
 
 /* Set photo gallery */
 .photos { list-style: none; padding: 0; margin: 1.25rem 0; display: grid;
