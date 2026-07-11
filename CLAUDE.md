@@ -21,6 +21,14 @@ the database is only ever read at **build time**, never at runtime.
 If the data source ever changes (API, CSV, CMS), change that one file — templates
 and permalinks stay the same.
 
+Each set has a `setType` column that groups sets into per-type index pages:
+`src/_data/setTypes.js` lists the distinct types, `src/type.njk` paginates them
+into `/types/<slug>/` pages, the home page links to each, and each set page links
+to its type's index. The set→type link and the type page permalink share one
+`slugify` (`lib/slugify.js`) so their URLs always match. Set cards are rendered by
+the shared `src/_includes/setcard.njk` macro so the home and type indexes stay
+identical.
+
 The `photos` table holds set images (one-to-many: `photos.setId` → `sets.id`).
 `src/_data/sets.js` attaches each set's ordered photos as `set.photos`. Image
 files live in `src/assets/sets/` (committed to the repo) and `photos.filename`

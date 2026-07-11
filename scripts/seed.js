@@ -22,7 +22,8 @@ db.exec(`
     year        INTEGER,
     description TEXT,
     brand       TEXT,
-    setId       TEXT
+    setId       TEXT,
+    setType     TEXT
   );
   CREATE TABLE photos (
     id       INTEGER PRIMARY KEY,
@@ -48,9 +49,14 @@ const slugify = (s) =>
   s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
 const insert = db.prepare(
-  `INSERT INTO sets (slug, name, family, species, year, description, brand, setId)
-   VALUES (@slug, @name, @family, @species, @year, @description, @brand, @setId)`
+  `INSERT INTO sets (slug, name, family, species, year, description, brand, setId, setType)
+   VALUES (@slug, @name, @family, @species, @year, @description, @brand, @setId, @setType)`
 );
+
+// Non-visible grouping field: drives the per-type index pages (/types/<slug>/).
+// Sample data is all figures, so these are just spread across the categories to
+// populate each type index — real data sets setType to the actual product type.
+const SET_TYPES = ["Figures", "Buildings", "Furniture", "Vehicles", "Families"];
 
 // Generate a few hundred sample rows so pagination/build behavior is realistic.
 const insertMany = db.transaction((rows) => rows.forEach((r) => insert.run(r)));
@@ -70,6 +76,7 @@ for (const [family, species] of FAMILIES) {
       description: `${name} of the ${family} family, a beloved ${species} of Sylvanian Forest.`,
       brand: "Sylvanian Families",
       setId: `SF-${String(n).padStart(4, "0")}`,
+      setType: SET_TYPES[n % 5],
     });
   }
 }
