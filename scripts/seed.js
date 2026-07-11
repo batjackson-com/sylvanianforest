@@ -59,7 +59,7 @@ const insert = db.prepare(
 const SET_TYPES = [
   "Families & Characters",
   "Buildings & Environments",
-  "Furniture",
+  "Furniture & Accessories",
   "Vehicles & Transportation",
   "Collectibles & Miscellaneous",
 ];
