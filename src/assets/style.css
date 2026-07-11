@@ -32,7 +32,7 @@ header .bar { max-width: 1080px; margin: 0 auto; padding: 1rem 1.5rem;
 .brand { display: inline-flex; align-items: center; gap: .7rem;
   font-family: var(--display); font-weight: 700; font-size: 1.6rem;
   color: var(--cream); text-decoration: none; }
-.brand .logo { width: 54px; height: 54px; border-radius: 50%;
+.brand .logo { width: 60px; height: 60px; border-radius: 50%;
   background: #fff; border: 2px solid var(--blue-light); flex: none; }
 .tagline { color: #cbb9a0; font-size: .85rem; margin-right: auto;
   align-self: center; }
