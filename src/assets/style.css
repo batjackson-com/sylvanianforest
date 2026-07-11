@@ -29,10 +29,20 @@ a:hover { color: #fff; }
 header { background: var(--brown); }
 header .bar { max-width: 1080px; margin: 0 auto; padding: 1rem 1.5rem;
   display: flex; align-items: baseline; flex-wrap: wrap; gap: .3rem 1.4rem; }
-.brand { font-family: var(--display); font-weight: 700; font-size: 1.6rem;
+.brand { display: inline-flex; align-items: center; gap: .7rem;
+  font-family: var(--display); font-weight: 700; font-size: 1.6rem;
   color: var(--cream); text-decoration: none; }
+.brand .logo { width: 54px; height: 54px; border-radius: 50%;
+  background: #fff; border: 2px solid var(--blue-light); flex: none; }
 .tagline { color: #cbb9a0; font-size: .85rem; margin-right: auto;
   align-self: center; }
+
+/* Home hero (Sylvanian village map) */
+.hero { margin: 0 0 1.75rem; }
+.hero img { display: block; width: 100%; height: auto; border-radius: 16px;
+  border: 1px solid var(--cream-line); }
+.hero figcaption { margin-top: .5rem; text-align: center; color: var(--muted);
+  font-size: .82rem; font-style: italic; }
 .mainnav { display: flex; flex-wrap: wrap; gap: .3rem 1.15rem; }
 .mainnav a { color: #e7ddca; text-decoration: none; font-size: 1rem;
   padding: .1rem 0; border-bottom: 2px solid transparent; }
