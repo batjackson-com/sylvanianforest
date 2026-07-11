@@ -1,48 +1,97 @@
-:root { --bg: #fbf7f0; --ink: #33291f; --accent: #7a5c3e; --card: #fff; }
+/* Palette taken from the apex site (sylvanianforest.com) computed styles:
+   dusty-blue body #355A80, deep-brown header #53352B, light-blue accent #80A8D2,
+   cream text, Fraunces serif throughout. Outlined rounded pills + cards on blue. */
+:root {
+  --blue: #355a80;        /* page background */
+  --blue-deep: #2e4f72;   /* slightly darker blue for depth */
+  --blue-light: #80a8d2;  /* light-blue accent (borders/hover) */
+  --brown: #53352b;       /* header */
+  --brown-dark: #43291f;
+  --cream: #f3eee2;       /* primary text on blue */
+  --cream-line: rgba(243, 238, 226, .38); /* hairline on blue */
+  --muted: #bccadb;       /* secondary text on blue */
+  --btn: #116dff;         /* primary action (matches apex) */
+  --display: "Fraunces", Georgia, "Times New Roman", serif;
+}
 * { box-sizing: border-box; }
 body {
-  margin: 0; font: 16px/1.6 system-ui, sans-serif;
-  color: var(--ink); background: var(--bg);
+  margin: 0; font: 16px/1.65 var(--display);
+  color: var(--cream); background: var(--blue);
 }
-header, footer { padding: 1rem 1.5rem; }
-header { border-bottom: 1px solid #e6dccb; }
-.brand { font-weight: 700; text-decoration: none; color: var(--accent); }
-main { max-width: 900px; margin: 0 auto; padding: 1.5rem; }
-a { color: var(--accent); }
-.crumbs { color: #998; font-size: .85rem; }
-.meta { color: #776; }
+h1, h2, h3 { font-family: var(--display); font-weight: 600;
+  color: var(--cream); line-height: 1.15; }
+h1 { font-size: clamp(2rem, 4vw, 2.8rem); margin: .2rem 0 .5rem; }
+a { color: var(--cream); text-decoration-color: var(--blue-light);
+  text-underline-offset: 2px; }
+a:hover { color: #fff; }
+
+/* Header — deep brown bar with cream serif nav */
+header { background: var(--brown); }
+header .bar { max-width: 1080px; margin: 0 auto; padding: 1rem 1.5rem;
+  display: flex; align-items: baseline; flex-wrap: wrap; gap: .3rem 1.4rem; }
+.brand { display: inline-flex; align-items: center; gap: .7rem;
+  font-family: var(--display); font-weight: 700; font-size: 1.6rem;
+  color: var(--cream); text-decoration: none; }
+.brand .logo { width: 60px; height: 60px; border-radius: 50%;
+  background: #fff; border: 2px solid var(--blue-light); flex: none; }
+.tagline { color: #cbb9a0; font-size: .85rem; margin-right: auto;
+  align-self: center; }
+
+/* Home hero (Sylvanian village map) */
+.hero { margin: 0 0 1.75rem; }
+.hero img { display: block; width: 100%; height: auto; border-radius: 16px;
+  border: 1px solid var(--cream-line); }
+.hero figcaption { margin-top: .5rem; text-align: center; color: var(--muted);
+  font-size: .82rem; font-style: italic; }
+.mainnav { display: flex; flex-wrap: wrap; gap: .3rem 1.15rem; }
+.mainnav a { color: #e7ddca; text-decoration: none; font-size: 1rem;
+  padding: .1rem 0; border-bottom: 2px solid transparent; }
+.mainnav a:hover { color: #fff; border-bottom-color: var(--blue-light); }
+
+main { max-width: 1080px; margin: 0 auto; padding: 1.75rem 1.5rem 2.5rem; }
+.crumbs { color: var(--muted); font-size: .9rem; }
+.crumbs a { color: var(--muted); }
+.meta { color: var(--muted); }
+.set-id code { color: var(--cream); }
+
+/* Outlined rounded pills — Browse by type (mirrors the apex category buttons) */
+.types h2 { font-size: 1.2rem; color: var(--cream); margin: 1.5rem 0 .7rem; }
+.types ul { list-style: none; padding: 0; margin: 0 0 1.9rem;
+  display: flex; flex-wrap: wrap; gap: .6rem; }
+.types a { display: inline-flex; align-items: center; gap: .5rem;
+  padding: .5rem 1.15rem; background: transparent; border: 1px solid var(--cream-line);
+  border-radius: 999px; text-decoration: none; color: var(--cream); font-weight: 600; }
+.types a:hover { border-color: var(--blue-light); background: rgba(128, 168, 210, .12); }
+.types a span { color: var(--muted); font-size: .8rem; font-weight: 600; }
+
+/* Set card grid — outlined rounded cards on blue */
 .grid { list-style: none; padding: 0; display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: .75rem; }
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.1rem; }
 .grid li { display: flex; }
 .grid a { display: flex; flex-direction: column; width: 100%;
-  background: var(--card); border: 1px solid #eadfce; border-radius: 10px;
-  overflow: hidden; text-decoration: none; }
-.grid a:hover { border-color: var(--accent); }
-.grid .card-body { display: block; padding: .9rem 1rem; }
-.grid .card-body span { display: block; color: #887; font-size: .85rem; }
-/* Uniform image area on every card (4:3), so rows line up with or without a photo. */
+  background: rgba(255, 255, 255, .05); border: 1px solid var(--cream-line);
+  border-radius: 16px; overflow: hidden; text-decoration: none; color: var(--cream);
+  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease; }
+.grid a:hover { border-color: var(--blue-light); transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, .22); }
+.grid .card-body { display: block; padding: .85rem 1rem 1rem; }
+.grid .card-body strong { font-family: var(--display); font-weight: 600; color: var(--cream); }
+.grid .card-body span { display: block; color: var(--muted); font-size: .85rem; margin-top: .15rem; }
+/* Uniform 4:3 image area so rows line up with or without a photo. */
 .grid .thumb { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3;
-  object-fit: cover; background: #f2ebdd; border-bottom: 1px solid #eadfce; }
+  object-fit: cover; background: #eef2f6; border-bottom: 1px solid var(--cream-line); }
 .grid .thumb--empty { display: flex; align-items: center; justify-content: center;
-  color: #b9a888; font-size: .8rem; letter-spacing: .03em; }
+  background: rgba(255, 255, 255, .04); color: var(--muted); font-size: .8rem;
+  letter-spacing: .03em; }
 
 /* Set photo gallery */
-.photos { list-style: none; padding: 0; margin: 1.25rem 0; display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+.photos { list-style: none; padding: 0; margin: 1.5rem 0; display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
 .photos li { margin: 0; }
-.photos img { display: block; width: 100%; height: auto; border-radius: 8px;
-  border: 1px solid #eadfce; background: #f2ebdd; }
-.photos figcaption { margin-top: .35rem; color: #887; font-size: .85rem; }
+.photos img { display: block; width: 100%; height: auto; border-radius: 12px;
+  border: 1px solid var(--cream-line); background: #eef2f6; }
+.photos figcaption { margin-top: .4rem; color: var(--muted); font-size: .85rem; }
 
-/* Browse-by-type nav */
-.types h2 { font-size: 1rem; color: #776; margin: 1.25rem 0 .5rem; }
-.types ul { list-style: none; padding: 0; margin: 0 0 1.5rem;
-  display: flex; flex-wrap: wrap; gap: .5rem; }
-.types a { display: inline-flex; align-items: center; gap: .4rem;
-  padding: .35rem .75rem; background: var(--card); border: 1px solid #eadfce;
-  border-radius: 999px; text-decoration: none; }
-.types a:hover { border-color: var(--accent); }
-.types a span { background: #f2ebdd; color: #887; font-size: .75rem;
-  padding: 0 .45rem; border-radius: 999px; }
-
-footer { color: #998; font-size: .85rem; border-top: 1px solid #e6dccb; }
+footer { max-width: 1080px; margin: 0 auto; padding: 1.75rem 1.5rem;
+  color: var(--muted); font-size: .9rem; border-top: 1px solid var(--cream-line);
+  text-align: center; }
