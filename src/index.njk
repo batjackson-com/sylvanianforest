@@ -12,7 +12,6 @@ title: Home
 <p>Browse {{ sets | length }} sets by type.</p>
 
 <nav class="types" aria-label="Browse by type">
-  <h2>Browse by type</h2>
   <ul>
     {% for type in setTypes %}
     <li><a href="/types/{{ type.slug }}/">{{ type.name }} <span>{{ type.count }}</span></a></li>
