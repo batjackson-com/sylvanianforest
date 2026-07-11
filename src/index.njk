@@ -2,7 +2,6 @@
 layout: base.njk
 title: Home
 ---
-{% from "setcard.njk" import card %}
 <figure class="hero">
   <img src="/assets/hero.jpg" alt="Illustrated map of the Sylvanian village"
        width="1200" height="800" />
@@ -10,17 +9,12 @@ title: Home
 </figure>
 
 <h1>Sylvanian Forest</h1>
-<p>{{ sets | length }} sets, one page each.</p>
+<p>Browse {{ sets | length }} sets by type.</p>
 
 <nav class="types" aria-label="Browse by type">
-  <h2>Browse by type</h2>
   <ul>
     {% for type in setTypes %}
     <li><a href="/types/{{ type.slug }}/">{{ type.name }} <span>{{ type.count }}</span></a></li>
     {% endfor %}
   </ul>
 </nav>
-
-<ul class="grid">
-  {% for set in sets %}{{ card(set) }}{% endfor %}
-</ul>
