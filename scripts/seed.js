@@ -56,7 +56,13 @@ const insert = db.prepare(
 // Non-visible grouping field: drives the per-type index pages (/types/<slug>/).
 // Sample data is all figures, so these are just spread across the categories to
 // populate each type index — real data sets setType to the actual product type.
-const SET_TYPES = ["Families & Characters", "Buildings", "Furniture", "Vehicles", "Families & Characters"];
+const SET_TYPES = [
+  "Families & Characters",
+  "Buildings & Environments",
+  "Furniture",
+  "Vehicles & Transportation",
+  "Collectibles & Miscellaneous",
+];
 
 // Generate a few hundred sample rows so pagination/build behavior is realistic.
 const insertMany = db.transaction((rows) => rows.forEach((r) => insert.run(r)));
