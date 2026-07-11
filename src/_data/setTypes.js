@@ -4,6 +4,16 @@
 import { openDb } from "../../lib/db.js";
 import { slugify } from "../../lib/slugify.js";
 
+// Explicit display order for the type pills / nav. Types not listed here fall
+// to the end, alphabetically. Edit this list to reorder the categories.
+const TYPE_ORDER = [
+  "Families & Characters",
+  "Buildings & Environments",
+  "Furniture",
+  "Collectibles & Miscellaneous",
+  "Vehicles & Transportation",
+];
+
 export default function () {
   const db = openDb();
   const rows = db
@@ -11,10 +21,16 @@ export default function () {
       `SELECT setType AS name, COUNT(*) AS count
          FROM sets
         WHERE setType IS NOT NULL AND setType <> ''
-        GROUP BY setType
-        ORDER BY setType`
+        GROUP BY setType`
     )
     .all();
   db.close();
+
+  const rank = (name) => {
+    const i = TYPE_ORDER.indexOf(name);
+    return i === -1 ? TYPE_ORDER.length : i;
+  };
+  rows.sort((a, b) => rank(a.name) - rank(b.name) || a.name.localeCompare(b.name));
+
   return rows.map((r) => ({ ...r, slug: slugify(r.name) }));
 }
