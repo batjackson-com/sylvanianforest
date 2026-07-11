@@ -1,48 +1,86 @@
-:root { --bg: #fbf7f0; --ink: #33291f; --accent: #7a5c3e; --card: #fff; }
+/* Palette adapted from the apex site's theme: warm cream, deep brown, a golden
+   yellow accent, and a soft teal. Fraunces (serif) for display, sans for body. */
+:root {
+  --bg: #faf5eb;          /* warm cream page */
+  --surface: #fffdf7;     /* cards / header */
+  --line: #e7dcc4;        /* hairline borders */
+  --ink: #3b2a20;         /* body text (warm brown-black) */
+  --muted: #8a7f6f;       /* secondary text */
+  --brown: #53352b;       /* primary deep brown */
+  --brown-dark: #3a251d;
+  --gold: #f3c64b;        /* signature golden yellow */
+  --teal: #4a9183;        /* secondary accent */
+  --display: "Fraunces", Georgia, "Times New Roman", serif;
+}
 * { box-sizing: border-box; }
 body {
-  margin: 0; font: 16px/1.6 system-ui, sans-serif;
+  margin: 0; font: 16px/1.65 system-ui, -apple-system, "Segoe UI", sans-serif;
   color: var(--ink); background: var(--bg);
 }
-header, footer { padding: 1rem 1.5rem; }
-header { border-bottom: 1px solid #e6dccb; }
-.brand { font-weight: 700; text-decoration: none; color: var(--accent); }
-main { max-width: 900px; margin: 0 auto; padding: 1.5rem; }
-a { color: var(--accent); }
-.crumbs { color: #998; font-size: .85rem; }
-.meta { color: #776; }
+h1, h2, h3 { font-family: var(--display); font-weight: 600;
+  color: var(--brown); line-height: 1.15; letter-spacing: -0.01em; }
+h1 { font-size: clamp(1.9rem, 4vw, 2.6rem); margin: .2rem 0 .5rem; }
+a { color: var(--brown); text-decoration-color: var(--gold);
+  text-underline-offset: 2px; }
+a:hover { color: var(--brown-dark); }
+
+/* Header + category nav */
+header { background: var(--surface); border-bottom: 3px solid var(--gold);
+  box-shadow: 0 1px 0 var(--line); }
+header .bar { max-width: 1080px; margin: 0 auto; padding: .85rem 1.5rem;
+  display: flex; align-items: baseline; flex-wrap: wrap; gap: .35rem 1.25rem; }
+.brand { font-family: var(--display); font-weight: 700; font-size: 1.5rem;
+  color: var(--brown); text-decoration: none; margin-right: auto; }
+.mainnav { display: flex; flex-wrap: wrap; gap: .25rem .9rem; }
+.mainnav a { color: var(--muted); text-decoration: none; font-size: .92rem;
+  padding: .15rem 0; border-bottom: 2px solid transparent; }
+.mainnav a:hover { color: var(--brown); border-bottom-color: var(--gold); }
+
+main { max-width: 1080px; margin: 0 auto; padding: 1.75rem 1.5rem 2.5rem; }
+.crumbs { color: var(--muted); font-size: .85rem; }
+.crumbs a { color: var(--muted); }
+.meta { color: var(--muted); }
+.set-type a, .set-id code { font-weight: 600; }
+
+/* Card grid */
 .grid { list-style: none; padding: 0; display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: .75rem; }
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
 .grid li { display: flex; }
 .grid a { display: flex; flex-direction: column; width: 100%;
-  background: var(--card); border: 1px solid #eadfce; border-radius: 10px;
-  overflow: hidden; text-decoration: none; }
-.grid a:hover { border-color: var(--accent); }
-.grid .card-body { display: block; padding: .9rem 1rem; }
-.grid .card-body span { display: block; color: #887; font-size: .85rem; }
+  background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+  overflow: hidden; text-decoration: none; color: var(--ink);
+  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease; }
+.grid a:hover { border-color: var(--gold); transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(83, 53, 43, .12); }
+.grid .card-body { display: block; padding: .85rem 1rem 1rem; }
+.grid .card-body strong { font-family: var(--display); font-weight: 600;
+  color: var(--brown); }
+.grid .card-body span { display: block; color: var(--muted); font-size: .85rem;
+  margin-top: .15rem; }
 /* Uniform image area on every card (4:3), so rows line up with or without a photo. */
 .grid .thumb { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3;
-  object-fit: cover; background: #f2ebdd; border-bottom: 1px solid #eadfce; }
+  object-fit: cover; background: #f1e7d3; border-bottom: 1px solid var(--line); }
 .grid .thumb--empty { display: flex; align-items: center; justify-content: center;
-  color: #b9a888; font-size: .8rem; letter-spacing: .03em; }
+  color: #bcae94; font-size: .8rem; letter-spacing: .03em; }
 
 /* Set photo gallery */
-.photos { list-style: none; padding: 0; margin: 1.25rem 0; display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+.photos { list-style: none; padding: 0; margin: 1.5rem 0; display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
 .photos li { margin: 0; }
-.photos img { display: block; width: 100%; height: auto; border-radius: 8px;
-  border: 1px solid #eadfce; background: #f2ebdd; }
-.photos figcaption { margin-top: .35rem; color: #887; font-size: .85rem; }
+.photos img { display: block; width: 100%; height: auto; border-radius: 12px;
+  border: 1px solid var(--line); background: #f1e7d3; }
+.photos figcaption { margin-top: .4rem; color: var(--muted); font-size: .85rem; }
 
-/* Browse-by-type nav */
-.types h2 { font-size: 1rem; color: #776; margin: 1.25rem 0 .5rem; }
-.types ul { list-style: none; padding: 0; margin: 0 0 1.5rem;
+/* Browse-by-type pills */
+.types h2 { font-size: 1.1rem; color: var(--brown); margin: 1.5rem 0 .6rem; }
+.types ul { list-style: none; padding: 0; margin: 0 0 1.75rem;
   display: flex; flex-wrap: wrap; gap: .5rem; }
-.types a { display: inline-flex; align-items: center; gap: .4rem;
-  padding: .35rem .75rem; background: var(--card); border: 1px solid #eadfce;
-  border-radius: 999px; text-decoration: none; }
-.types a:hover { border-color: var(--accent); }
-.types a span { background: #f2ebdd; color: #887; font-size: .75rem;
-  padding: 0 .45rem; border-radius: 999px; }
+.types a { display: inline-flex; align-items: center; gap: .45rem;
+  padding: .4rem .85rem; background: var(--surface); border: 1px solid var(--line);
+  border-radius: 999px; text-decoration: none; color: var(--brown); font-weight: 600; }
+.types a:hover { border-color: var(--gold); background: #fffef9; }
+.types a span { background: var(--gold); color: var(--brown-dark); font-size: .72rem;
+  font-weight: 700; padding: .05rem .5rem; border-radius: 999px; }
 
-footer { color: #998; font-size: .85rem; border-top: 1px solid #e6dccb; }
+footer { max-width: 1080px; margin: 0 auto; padding: 1.5rem;
+  color: var(--muted); font-size: .85rem; border-top: 1px solid var(--line); }
