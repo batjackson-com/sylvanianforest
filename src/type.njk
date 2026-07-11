@@ -12,7 +12,7 @@ eleventyComputed:
   title: "{{ type.name }}"
 ---
 {% from "setcard.njk" import card %}
-<p class="crumbs"><a href="/">Home</a> / Types</p>
+<p class="crumbs"><a href="/">Home</a> / {{ type.name }}</p>
 <h1>{{ type.name }}</h1>
 <p>{{ type.count }} set{% if type.count != 1 %}s{% endif %}</p>
 
