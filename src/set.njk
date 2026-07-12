@@ -15,11 +15,13 @@ eleventyComputed:
   <p class="crumbs"><a href="/">Home</a> / {{ set.family }}</p>
   <h1>{{ set.name }}</h1>
   <p class="meta">
-    <span>{{ set.brand }}</span> ·
-    <span>{{ set.species }}</span> ·
-    <span>{{ set.family }} family</span> ·
-    <span>{{ set.year }}</span>{% if set.setId %} ·
-    <span class="set-id"><code>{{ set.setId }}</code></span>{% endif %}
+    <span>{{ set.brand }}</span>
+    {% if set.species %} · <span>{{ set.species }}</span>{% endif %}
+    {% if set.family %} · <span>{{ set.family }} family</span>{% endif %}
+    {% if set.company %} · <span>{{ set.company }}</span>{% endif %}
+    {% if set.country %} · <span>{{ set.country }}</span>{% endif %}
+    {% if set.year %} · <span>{{ set.year }}</span>{% endif %}
+    {% if set.setId %} · <span class="set-id"><code>{{ set.setId }}</code></span>{% endif %}
   </p>
 
   {% if set.tags.length %}
