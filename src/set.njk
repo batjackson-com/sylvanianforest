@@ -18,9 +18,9 @@ eleventyComputed:
     <span>{{ set.brand }}</span> ·
     <span>{{ set.species }}</span> ·
     <span>{{ set.family }} family</span> ·
-    <span>{{ set.year }}</span>
+    <span>{{ set.year }}</span>{% if set.setId %} ·
+    <span class="set-id">Set ID: <code>{{ set.setId }}</code></span>{% endif %}
   </p>
-  {% if set.setId %}<p class="set-id">Set ID: <code>{{ set.setId }}</code></p>{% endif %}
 
   {% if set.tags.length %}
   <div class="tags-block">
