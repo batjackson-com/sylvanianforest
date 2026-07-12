@@ -23,6 +23,12 @@ eleventyComputed:
   {% if set.setType %}<p class="set-type">Type: <a href="/types/{{ set.typeSlug }}/">{{ set.setType }}</a></p>{% endif %}
   {% if set.setId %}<p class="set-id">Set ID: <code>{{ set.setId }}</code></p>{% endif %}
 
+  {% if set.tags.length %}
+  <ul class="tags">
+    {% for tag in set.tags %}<li class="tag">{{ tag }}</li>{% endfor %}
+  </ul>
+  {% endif %}
+
   {% if set.photos.length %}
   <ul class="photos">
     {% for photo in set.photos %}

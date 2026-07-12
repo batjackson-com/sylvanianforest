@@ -27,6 +27,18 @@ export default function () {
   }
   for (const s of sets) s.photos = bySet.get(s.id) ?? [];
 
+  // Attach each set's tags as `set.tags` — an ordered array of tag strings
+  // (zero to many). tags.setId is a foreign key to sets.id (the integer PK),
+  // same one-to-many shape as photos. The list is seeded from setType but is
+  // independent of it: a set can carry any number of tags, or none.
+  const tags = db.prepare("SELECT setId, tag FROM tags ORDER BY sort, tag").all();
+  const tagsBySet = new Map();
+  for (const t of tags) {
+    if (!tagsBySet.has(t.setId)) tagsBySet.set(t.setId, []);
+    tagsBySet.get(t.setId).push(t.tag);
+  }
+  for (const s of sets) s.tags = tagsBySet.get(s.id) ?? [];
+
   db.close();
   return sets;
 }
