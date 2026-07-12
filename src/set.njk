@@ -20,7 +20,6 @@ eleventyComputed:
     <span>{{ set.family }} family</span> ·
     <span>{{ set.year }}</span>
   </p>
-  {% if set.setType %}<p class="set-type">Type: <a href="/types/{{ set.typeSlug }}/">{{ set.setType }}</a></p>{% endif %}
   {% if set.setId %}<p class="set-id">Set ID: <code>{{ set.setId }}</code></p>{% endif %}
 
   {% if set.tags.length %}
