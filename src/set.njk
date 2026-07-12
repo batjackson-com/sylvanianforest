@@ -26,7 +26,7 @@ eleventyComputed:
   <div class="tags-block">
     <span class="tags-label">Tags:</span>
     <ul class="tags">
-      {% for tag in set.tags %}<li class="tag">{{ tag }}</li>{% endfor %}
+      {% for tag in set.tags %}<li class="tag"><a href="/tags/{{ tag | slugify }}/">{{ tag }}</a></li>{% endfor %}
     </ul>
   </div>
   {% endif %}

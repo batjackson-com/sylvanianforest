@@ -9,10 +9,10 @@ title: Home
 </figure>
 
 
-<nav class="types" aria-label="Browse by type">
+<nav class="types" aria-label="Browse by tag">
   <ul>
-    {% for type in setTypes %}
-    <li><a href="/types/{{ type.slug }}/">{{ type.name }} <span>{{ type.count }}</span></a></li>
+    {% for tag in tags %}
+    <li><a href="/tags/{{ tag.slug }}/">{{ tag.name }} <span>{{ tag.count }}</span></a></li>
     {% endfor %}
   </ul>
 </nav>

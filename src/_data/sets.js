@@ -3,15 +3,10 @@
 // this is the ONLY file that needs to change if the source becomes an API, CSV,
 // or headless CMS — templates and permalinks stay the same.
 import { openDb } from "../../lib/db.js";
-import { slugify } from "../../lib/slugify.js";
 
 export default function () {
   const db = openDb();
   const sets = db.prepare("SELECT * FROM sets ORDER BY family, name").all();
-
-  // Slug for linking a set to its type index (/types/<slug>/). Uses the shared
-  // slugify so it matches the permalink generated from setTypes.js.
-  for (const s of sets) s.typeSlug = s.setType ? slugify(s.setType) : null;
 
   // Attach each set's photos as `set.photos` (ordered). photos.setId is a
   // foreign key to sets.id (the integer PK) — distinct from the sets.setId

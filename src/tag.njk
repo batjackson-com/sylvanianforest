@@ -1,0 +1,23 @@
+---
+# One index page per distinct tag, e.g. /tags/buildings-environments/.
+# Paginates the `tags` global (src/_data/tags.js) and lists the sets carrying
+# that tag. Reuses the shared card macro so cards match the home page.
+layout: base.njk
+pagination:
+  data: tags
+  size: 1
+  alias: tag
+permalink: "/tags/{{ tag.slug }}/"
+eleventyComputed:
+  title: "{{ tag.name }}"
+---
+{% from "setcard.njk" import card %}
+<p class="crumbs"><a href="/">Home</a> / {{ tag.name }}</p>
+<h1>{{ tag.name }}</h1>
+<p>{{ tag.count }} set{% if tag.count != 1 %}s{% endif %}</p>
+
+<ul class="grid">
+  {% for set in sets %}
+    {% if tag.name in set.tags %}{{ card(set) }}{% endif %}
+  {% endfor %}
+</ul>
