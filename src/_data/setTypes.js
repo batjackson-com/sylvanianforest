@@ -9,7 +9,7 @@ import { slugify } from "../../lib/slugify.js";
 const TYPE_ORDER = [
   "Families & Characters",
   "Buildings & Environments",
-  "Furniture",
+  "Furniture & Accessories",
   "Collectibles & Miscellaneous",
   "Vehicles & Transportation",
 ];
