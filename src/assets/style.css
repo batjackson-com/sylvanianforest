@@ -5,6 +5,7 @@
   --blue: #355a80;        /* page background */
   --blue-deep: #2e4f72;   /* slightly darker blue for depth */
   --blue-light: #80a8d2;  /* light-blue accent (borders/hover) */
+  --blue-hover: #689ade;  /* apex pill mouseover fill (rgb 104,154,222) */
   --brown: #53352b;       /* header */
   --brown-dark: #43291f;
   --cream: #f3eee2;       /* primary text on blue */
@@ -54,6 +55,19 @@ main { max-width: 1080px; margin: 0 auto; padding: 1.75rem 1.5rem 2.5rem; }
 .meta { color: var(--muted); }
 .set-id code { color: var(--cream); }
 
+/* Set tags — small outlined pills (share the rounded-pill look of the type nav) */
+.tags-block { display: flex; align-items: baseline; flex-wrap: wrap;
+  gap: .5rem .7rem; margin: .8rem 0 0; }
+.tags-label { color: var(--muted); font-weight: 600; }
+.tags { list-style: none; padding: 0; margin: 0;
+  display: flex; flex-wrap: wrap; gap: .5rem; }
+.tags .tag { font-size: .8rem; font-weight: 600; }
+.tags .tag a { display: inline-block; padding: .3rem .85rem;
+  border: 1px solid var(--cream-line); border-radius: 999px;
+  color: var(--muted); text-decoration: none; }
+.tags .tag a:hover { border-color: var(--blue-hover);
+  background: var(--blue-hover); color: #fff; }
+
 /* Outlined rounded pills — Browse by type (mirrors the apex category buttons) */
 .types h2 { font-size: 1.2rem; color: var(--cream); margin: 1.5rem 0 .7rem; }
 .types ul { list-style: none; padding: 0; margin: 0 0 1.9rem;
@@ -61,7 +75,8 @@ main { max-width: 1080px; margin: 0 auto; padding: 1.75rem 1.5rem 2.5rem; }
 .types a { display: inline-flex; align-items: center; gap: .5rem;
   padding: .5rem 1.15rem; background: transparent; border: 1px solid var(--cream-line);
   border-radius: 999px; text-decoration: none; color: var(--cream); font-weight: 600; }
-.types a:hover { border-color: var(--blue-light); background: rgba(128, 168, 210, .12); }
+.types a:hover { border-color: var(--blue-hover); background: var(--blue-hover); color: #fff; }
+.types a:hover span { color: #fff; }
 .types a span { color: var(--muted); font-size: .8rem; font-weight: 600; }
 
 /* Set card grid — outlined rounded cards on blue */

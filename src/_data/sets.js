@@ -3,15 +3,10 @@
 // this is the ONLY file that needs to change if the source becomes an API, CSV,
 // or headless CMS — templates and permalinks stay the same.
 import { openDb } from "../../lib/db.js";
-import { slugify } from "../../lib/slugify.js";
 
 export default function () {
   const db = openDb();
   const sets = db.prepare("SELECT * FROM sets ORDER BY family, name").all();
-
-  // Slug for linking a set to its type index (/types/<slug>/). Uses the shared
-  // slugify so it matches the permalink generated from setTypes.js.
-  for (const s of sets) s.typeSlug = s.setType ? slugify(s.setType) : null;
 
   // Attach each set's photos as `set.photos` (ordered). photos.setId is a
   // foreign key to sets.id (the integer PK) — distinct from the sets.setId
@@ -26,6 +21,18 @@ export default function () {
     bySet.get(p.setId).push(p);
   }
   for (const s of sets) s.photos = bySet.get(s.id) ?? [];
+
+  // Attach each set's tags as `set.tags` — an ordered array of tag strings
+  // (zero to many). tags.setId is a foreign key to sets.id (the integer PK),
+  // same one-to-many shape as photos. The list is seeded from setType but is
+  // independent of it: a set can carry any number of tags, or none.
+  const tags = db.prepare("SELECT setId, tag FROM tags ORDER BY sort, tag").all();
+  const tagsBySet = new Map();
+  for (const t of tags) {
+    if (!tagsBySet.has(t.setId)) tagsBySet.set(t.setId, []);
+    tagsBySet.get(t.setId).push(t.tag);
+  }
+  for (const s of sets) s.tags = tagsBySet.get(s.id) ?? [];
 
   db.close();
   return sets;
